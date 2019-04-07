@@ -1,6 +1,6 @@
 # Buildkite Build Trace
 
-This is a CLI tool for generating OpenTracing traces of a build and the jobs that are in it. It's useful for troubleshooting what is slow in a build.
+This is a quick Friday afternoon experiment 🦑🧙🏻‍♂️ for generating a waterfall graph of the Jobs in a Build using our [GraphQL API](https://buildkite.com/docs/apis/graphql-api) and [Jaeger](https://www.jaegertracing.io).
 
 ![](https://lox-screenshots.s3.amazonaws.com/Jaeger_UI_2019-04-08_08-44-34.png)
 
