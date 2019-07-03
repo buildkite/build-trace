@@ -168,18 +168,20 @@ func (b *build) UnmarshalJSON(j []byte) error {
 				return err
 			}
 
-			jobs = append(jobs, job{
-				UUID: typedJob.UUID,
-				CommandJob: &commandJob{
-					CreatedAt:  parsedJob.CreatedAt.NilableTime(),
-					RunnableAt: parsedJob.RunnableAt.NilableTime(),
-					StartedAt:  parsedJob.StartedAt.NilableTime(),
-					FinishedAt: parsedJob.FinishedAt.NilableTime(),
-					State:      parsedJob.State,
-					Command:    parsedJob.Command,
-					Label:      parsedJob.Label,
-				},
-			})
+			if (parsedJob.State != "SKIPPED") {
+				jobs = append(jobs, job{
+					UUID: typedJob.UUID,
+					CommandJob: &commandJob{
+						CreatedAt:  parsedJob.CreatedAt.NilableTime(),
+						RunnableAt: parsedJob.RunnableAt.NilableTime(),
+						StartedAt:  parsedJob.StartedAt.NilableTime(),
+						FinishedAt: parsedJob.FinishedAt.NilableTime(),
+						State:      parsedJob.State,
+						Command:    parsedJob.Command,
+						Label:      parsedJob.Label,
+					},
+				})
+			}
 
 		case `JobTypeWait`:
 			var parsedJob struct {
