@@ -1,6 +1,6 @@
 # Buildkite Build Trace
 
-This is a quick Friday afternoon experiment 🦑🧙🏻‍♂️ for generating a waterfall graph of the Jobs in a Build using our [GraphQL API](https://buildkite.com/docs/apis/graphql-api) and [Jaeger](https://www.jaegertracing.io).
+🦑🧙🏻‍♂️ Generate a waterfall graph of the Jobs in a Build using our [GraphQL API](https://buildkite.com/docs/apis/graphql-api) and [Jaeger](https://www.jaegertracing.io).
 
 ![](https://lox-screenshots.s3.amazonaws.com/Jaeger_UI_2019-04-08_08-44-34.png)
 
