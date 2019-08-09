@@ -73,6 +73,7 @@ func main() {
 				opentracing.ChildOf(buildSpan.Context()),
 				opentracing.StartTime(*job.CommandJob.StartedAt),
 				opentracing.Tag{Key: "UUID", Value: job.UUID},
+				opentracing.Tag{Key: "Wait time", Value: job.CommandJob.StartedAt.Sub(*job.CommandJob.RunnableAt)},
 			)
 
 			jobSpan.FinishWithOptions(opentracing.FinishOptions{
