@@ -73,6 +73,7 @@ func main() {
 				opentracing.ChildOf(buildSpan.Context()),
 				opentracing.StartTime(*job.CommandJob.StartedAt),
 				opentracing.Tag{Key: "UUID", Value: job.UUID},
+				opentracing.Tag{Key: "Wait time", Value: job.CommandJob.StartedAt.Sub(*job.CommandJob.RunnableAt)},
 			)
 
 			jobSpan.FinishWithOptions(opentracing.FinishOptions{
@@ -168,18 +169,20 @@ func (b *build) UnmarshalJSON(j []byte) error {
 				return err
 			}
 
-			jobs = append(jobs, job{
-				UUID: typedJob.UUID,
-				CommandJob: &commandJob{
-					CreatedAt:  parsedJob.CreatedAt.NilableTime(),
-					RunnableAt: parsedJob.RunnableAt.NilableTime(),
-					StartedAt:  parsedJob.StartedAt.NilableTime(),
-					FinishedAt: parsedJob.FinishedAt.NilableTime(),
-					State:      parsedJob.State,
-					Command:    parsedJob.Command,
-					Label:      parsedJob.Label,
-				},
-			})
+			if (parsedJob.State != "SKIPPED") {
+				jobs = append(jobs, job{
+					UUID: typedJob.UUID,
+					CommandJob: &commandJob{
+						CreatedAt:  parsedJob.CreatedAt.NilableTime(),
+						RunnableAt: parsedJob.RunnableAt.NilableTime(),
+						StartedAt:  parsedJob.StartedAt.NilableTime(),
+						FinishedAt: parsedJob.FinishedAt.NilableTime(),
+						State:      parsedJob.State,
+						Command:    parsedJob.Command,
+						Label:      parsedJob.Label,
+					},
+				})
+			}
 
 		case `JobTypeWait`:
 			var parsedJob struct {
