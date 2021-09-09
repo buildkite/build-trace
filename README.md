@@ -1,3 +1,7 @@
+# Deprecated
+
+> Buildkite no longer maintains build-trace. This repository has been deprecated and is no longer maintained.
+
 # Buildkite Build Trace
 
 🦑🧙🏻‍♂️ Generate a waterfall graph of the Jobs in a Build using our [GraphQL API](https://buildkite.com/docs/apis/graphql-api) and [Jaeger](https://www.jaegertracing.io).
